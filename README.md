@@ -4,6 +4,8 @@ Este é o repositório base do desafio 156. É aqui que começamos a hackear a c
 
 Caso a equipe não tenha experiência com o **git** e suas ferramentas, consulte os mentores para auxiliar com a configuração inicial. Um guia rápido e intuitivo pode ser encontrado [aqui](http://rogerdudler.github.io/git-guide/index.pt_BR.html).
 
+Para quem já possui prática com ferramentas de integração contínua, integramos nosso repositório no Travis CI: [](https://travis-ci.org/profile/hackingsp)
+
 #### Os desafios do SP156
 
 <details>
