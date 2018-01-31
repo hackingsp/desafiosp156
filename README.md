@@ -4,6 +4,8 @@ Este é o repositório base do desafio 156. É aqui que começamos a hackear a c
 
 Caso a equipe não tenha experiência com o **git** e suas ferramentas, consulte os mentores para auxiliar com a configuração inicial. Um guia rápido e intuitivo pode ser encontrado [aqui](http://rogerdudler.github.io/git-guide/index.pt_BR.html).
 
+A senha do arquivo datasets/Hackathon_2017_2_Semestre.xlsx.zip é **maonamassa**
+
 #### Os desafios do SP156
 
 <details>
