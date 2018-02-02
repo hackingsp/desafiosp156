@@ -1,2 +1,0 @@
-class SolicitationController < ApplicationController
-end
