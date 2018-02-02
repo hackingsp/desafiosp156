@@ -12,7 +12,7 @@ end
 def show
 end
 
-def status_charts
+def charts
   @solicitations = Solicitation.all
 end
 
