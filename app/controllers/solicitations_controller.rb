@@ -13,6 +13,9 @@ def show
 end
 
 private
+
+  def make_filters(elements=nil)
+  end
   # Use callbacks to share common setup or constraints between actions.
   def set_solicitation
     @solicitation = Solicitation.find(params[:id])

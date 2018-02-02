@@ -16,9 +16,12 @@
     <div class="container">
       <br><br>
       <h1 class="header center black-text">156 Transparente</h1>
-      
+      <% unless @solicitations.nil? %>
+        <%= @solicitations.count %>
+      <%end%>
     </div>
   </div>
+
 
 
   <div class="container">
