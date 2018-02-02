@@ -1,10 +1,12 @@
 class SolicitationsController < ApplicationController
   before_action :set_solicitation, only: [:show]
 
+def home
+end
 # GET /solicitations
 # GET /solicitations.json
 def index
-  @solicitations = Solicitation.all
+  @solicitations = Solicitation.paginate(:page => params[:page], :per_page => 5)
 end
 
 # GET /solicitations/1

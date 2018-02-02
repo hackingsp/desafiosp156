@@ -4,14 +4,16 @@
     <title>HackatonSp</title>
     <%= csrf_meta_tags %>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag    'application', media: 'all' %>
+    <%= javascript_include_tag 'application' %>
   </head>
 
   <body>
-    <nav class="light-blue lighten-1" role="navigation">
+    <nav class="grey darken-3" role="navigation">
       <div class="nav-wrapper container">
-        <%= image_tag("logo.jpg", :alt => "logo", size: "170x50", style: "margin-top: 7px") %>        
+        <%= link_to controller: "solicitations", action: "home"  do %>
+          <%= image_tag("prefeitura-tec.png", :alt => "logo", size: "50x50", style: "margin-top: 7px") %>
+        <% end %>
         <ul class="right hide-on-med-and-down">
         </ul>
 
@@ -22,7 +24,7 @@
       </div>
     </nav>
         <%= yield %>
-    <footer class="page-footer blue">
+    <footer class="page-footer grey darken-3">
       <div class="container">
         <div class="row">
           <div class="col l8 s12">
