@@ -6,4 +6,5 @@ Rails.application.routes.draw do
   resources :solicitations
 
   get "plot_map", to: "solicitations#plot_map"
+  get "plot_temp_map", to: "solicitations#plot_temp_map"
 end
