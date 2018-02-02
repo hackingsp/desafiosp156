@@ -12,6 +12,8 @@ end
 def show
 end
 
+def charts
+end
 private
 
   def make_filters(elements=nil)
