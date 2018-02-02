@@ -1,0 +1,271 @@
+
+
+<br><br>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<div class="row" style="margin-top: 20px; margin-bottom: 50px">
+  <div id="status_chart" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto; margin-left: 400px" class="col s12 m4 l8"></div><br>
+  <div class="col s12 m4 l8" style="text-align: center; margin-top: 100px; width: 500px;">
+    <div class="card blue-grey darken-1">
+      <div class="card-content white-text">
+        <span class="card-title">Status</span>
+        <p>O gráfico ao lado é referente aos status de cada solicitação feita nas plataformas da prefeitura. Os status possíveis são Finalizado, Em Aberto, Encerrado, Cancelado e Relacionado.</p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row" style="margin-top: 50px; margin-bottom: 50px; background-color: white">
+  <div class="col s12 m4 l8" style="text-align: center; margin-top: 100px; width: 500px; margin-left: 400px">
+    <div class="card blue-grey darken-1">
+      <div class="card-content white-text">
+        <span class="card-title">Temas</span>
+        <p>A prefeitura de São Paulo fornece vários serviços para a população e esses serviços são classificados em temas. Eles estão descritos no gráfico ao lado. Cada serviço contém várias solicitações, ou seja, o Serviço de tranporte contém várias outras soluções além apenas de "tapar buracos"</p>
+      </div>
+    </div>
+  </div>
+  <div id="theme_chart" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto" class="col s12 m4 l8"></div><br>
+</div>
+<div class="row" style="margin-top: 50px; margin-bottom: 50px">
+  <div id="channel_chart" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto; margin-left: 400px" class="col s12 m4 l8"></div><br>
+  <div class="col s12 m4 l8" style="text-align: center; margin-top: 100px; width: 500px;">
+    <div class="card blue-grey darken-1">
+      <div class="card-content white-text">
+        <span class="card-title">Canais</span>
+        <p>É possível fazer uma solicitação de várias formas para a prefeitura, como pelo nosso aplicativo, pelo portal web ou até mesmo por ligação. No gráfico ao lado é mostrado quantas solicitações são feitas de acordo com cada serviço.</p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row" style="margin-top: 50px; margin-bottom: 50px; background-color: white">
+  <div class="col s12 m4 l8" style="text-align: center; padding-top: 100px; width: 500px; margin-left: 280px">
+    <div class="card blue-grey darken-1">
+      <div class="card-content white-text">
+        <span class="card-title">Canais</span>
+        <p>A Prefeitura fornece mais de 300 serviços para a população. Com o gráfico ao lado você consegue conferir qual o serviço mais pedido e te despertar a vontade de entender o motivo de as solicitações se repetirem tanto com alguns serviços específicos.</p>
+      </div>
+    </div>
+  </div>
+  <div id="service_chart" style="min-width: 310px; height: 400px; max-width: 1000px; margin: 0 auto" class="col s12 m4 l8"></div><br>
+</div>
+
+<script>
+// Build the charts
+$(function() {
+  $('#status_chart').highcharts({
+    chart: {
+        plotBackgroundColor: null,
+        plotBorderWidth: null,
+        plotShadow: false,
+        type: 'pie'
+    },
+    title: {
+        text: 'Todas as solicitações classificas pelo seu status'
+    },
+    tooltip: {
+        pointFormat: '{series.name}: <b>{point.percentage:.5f}%</b>'
+    },
+    plotOptions: {
+        pie: {
+            allowPointSelect: true,
+            cursor: 'pointer',
+            dataLabels: {
+                enabled: false
+            },
+            showInLegend: true
+        }
+    },
+    series: [{
+        name: 'Brands',
+        colorByPoint: true,
+        data: [{
+            name: 'EM ANDAMENTO',
+            y: <%= (100.0*@solicitations.where(solicitation_status: "EM ANDAMENTO").count) / @solicitations.count %>,
+        }, {
+            name: 'ABERTA',
+            y: <%= (100.0*@solicitations.where(solicitation_status: "ABERTA").count) / @solicitations.count %>,
+        }, {
+            name: 'FINALIZADO',
+            y: <%= (100.0*@solicitations.where(solicitation_status: "FINALIZADO").count) / @solicitations.count %>,
+        }, {
+            name: 'CANCELADA',
+            y: <%= (100.0*@solicitations.where(solicitation_status: "CANCELADA").count) / @solicitations.count %>
+        }, {
+            name: 'RELACIONADA',
+            y: <%= (100.0*@solicitations.where(solicitation_status: "RELACIONADA").count) / @solicitations.count %>
+        }]
+    }]
+  });
+  $('#service_chart').highcharts({
+    chart: {
+        plotBackgroundColor: null,
+        plotBorderWidth: null,
+        plotShadow: false,
+        type: 'pie'
+    },
+    title: {
+        text: 'Todas as solicitações classificas pelo seu tipo serviço'
+    },
+    tooltip: {
+        pointFormat: '{series.name}: <b>{point.percentage:.5f}%</b>'
+    },
+    plotOptions: {
+        pie: {
+            allowPointSelect: true,
+            cursor: 'pointer',
+            dataLabels: {
+                enabled: false
+            },
+            showInLegend: true
+        }
+    },
+    series: [{
+        name: 'Brands',
+        colorByPoint: true,
+        data: [{
+            name: 'Tapa-buraco',
+            y: <%= (100.0*@solicitations.where(service: "Tapa-buraco").count) / @solicitations.count %>,
+        }, {
+            name: 'Avaliação da circulação e acesso de veículos',
+            y: <%= (100.0*@solicitations.where(service: "Avaliação da circulação e acesso de veículos").count) / @solicitations.count %>,
+        }, {
+            name: 'Avaliação e serviços em árvore em área pública',
+            y: <%= (100.0*@solicitations.where(service: "Avaliação e serviços em árvore em área pública").count) / @solicitations.count %>,
+        }, {
+            name: 'Capinação e roçada',
+            y: <%= (100.0*@solicitations.where(service: "Capinação e roçada").count) / @solicitations.count %>
+        }, {
+            name: 'Construção ou reforma de guias, sarjetas e sarjetões',
+            y: <%= (100.0*@solicitations.where(service: "Construção ou reforma de guias, sarjetas e sarjetões").count) / @solicitations.count %>
+        }, {
+            name: 'Denúncia de problemas no embarque/desembarque',
+            y: <%= (100.0*@solicitations.where(service: "Denúncia de problemas no embarque/desembarque").count) / @solicitations.count %>,
+        }, {
+            name: 'Limpeza de bueiros, boca de lobo e poços de visita',
+            y: <%= (100.0*@solicitations.where(service: "Limpeza de bueiros, boca de lobo e poços de visita").count) / @solicitations.count %>,
+        }, {
+            name: 'Manutenção de sinalização horizontal (pintura de solo)',
+            y: <%= (100.0*@solicitations.where(service: "Manutenção de sinalização horizontal (pintura de solo)").count) / @solicitations.count %>
+        }, {
+            name: 'Obstáculo dificultando acessibilidade',
+            y: <%= (100.0*@solicitations.where(service: "Obstáculo dificultando acessibilidade").count) / @solicitations.count %>
+        }, {
+            name: 'Reclamação de afundamento da pavimentação em vias públicas',
+            y: <%= (100.0*@solicitations.where(service: "Reclamação de afundamento da pavimentação em vias públicas").count) / @solicitations.count %>,
+        }, {
+            name: 'Reclamação de falta de varrição',
+            y: <%= (100.0*@solicitations.where(service: "Reclamação de falta de varrição").count) / @solicitations.count %>
+        }, {
+            name: 'Reclamação de intervalo excessivo da linha',
+            y: <%= (100.0*@solicitations.where(service: "Reclamação de intervalo excessivo da linha").count) / @solicitations.count %>
+        }, {
+            name: 'Reforma de bueiros, boca de lobo e poços de visita',
+            y: <%= (100.0*@solicitations.where(service: "Reforma de bueiros, boca de lobo e poços de visita").count) / @solicitations.count %>,
+        }, {
+            name: 'Remoção de animal morto em via pública',
+            y: <%= (100.0*@solicitations.where(service: "Remoção de animal morto em via pública").count) / @solicitations.count %>,
+        }, {
+            name: 'Remoção de entulho em via pública',
+            y: <%= (100.0*@solicitations.where(service: "Remoção de entulho em via pública").count) / @solicitations.count %>
+        }, {
+            name: 'Remoção de grandes objetos em vias públicas',
+            y: <%= (100.0*@solicitations.where(service: "Remoção de grandes objetos em vias públicas").count) / @solicitations.count %>
+        }]
+    }]
+  });
+  $('#theme_chart').highcharts({
+    chart: {
+        plotBackgroundColor: null,
+        plotBorderWidth: null,
+        plotShadow: false,
+        type: 'pie'
+    },
+    title: {
+        text: 'Todas as solicitações classificas pelo seu tema'
+    },
+    tooltip: {
+        pointFormat: '{series.name}: <b>{point.percentage:.5f}%</b>'
+    },
+    plotOptions: {
+        pie: {
+            allowPointSelect: true,
+            cursor: 'pointer',
+            dataLabels: {
+                enabled: false
+            },
+            showInLegend: true
+        }
+    },
+    series: [{
+        name: 'Brands',
+        colorByPoint: true,
+        data: [{
+            name: 'Acessibilidade',
+            y: <%= (100.0*@solicitations.where(theme: "Acessibilidade").count) / @solicitations.count %>,
+        }, {
+            name: 'Animais',
+            y: <%= (100.0*@solicitations.where(theme: "Animais").count) / @solicitations.count %>,
+        }, {
+            name: 'Lixo e limpeza',
+            y: <%= (100.0*@solicitations.where(theme: "Lixo e limpeza").count) / @solicitations.count %>,
+        }, {
+            name: 'Meio Ambiente',
+            y: <%= (100.0*@solicitations.where(theme: "Meio Ambiente").count) / @solicitations.count %>
+        }, {
+            name: 'Rua e bairro',
+            y: <%= (100.0*@solicitations.where(theme: "Rua e bairro").count) / @solicitations.count %>
+        }, {
+            name: 'Trânsito',
+            y: <%= (100.0*@solicitations.where(theme: "Trânsito").count) / @solicitations.count %>
+        }, {
+            name: 'Transporte',
+            y: <%= (100.0*@solicitations.where(theme: "Transporte").count) / @solicitations.count %>
+        }]
+    }]
+  });
+  $('#channel_chart').highcharts({
+    chart: {
+        plotBackgroundColor: null,
+        plotBorderWidth: null,
+        plotShadow: false,
+        type: 'pie'
+    },
+    title: {
+        text: 'Todas as solicitações classificas pelo canal de solicitação'
+    },
+    tooltip: {
+        pointFormat: '{series.name}: <b>{point.percentage:.5f}%</b>'
+    },
+    plotOptions: {
+        pie: {
+            allowPointSelect: true,
+            cursor: 'pointer',
+            dataLabels: {
+                enabled: false
+            },
+            showInLegend: true
+        }
+    },
+    series: [{
+        name: 'Brands',
+        colorByPoint: true,
+        data: [{
+            name: 'APLICATIVO',
+            y: <%= (100.0*@solicitations.where(channel: "APLICATIVO").count) / @solicitations.count %>,
+        }, {
+            name: 'PORTAL ONLINE',
+            y: <%= (100.0*@solicitations.where(channel: "PORTAL ONLINE").count) / @solicitations.count %>,
+        }, {
+            name: 'CRM: CENTRAL',
+            y: <%= (100.0*@solicitations.where(channel: "CRM: CENTRAL").count) / @solicitations.count %>,
+        }, {
+            name: 'INTEGRAÇÕES',
+            y: <%= (100.0*@solicitations.where(channel: "INTEGRAÇÕES").count) / @solicitations.count %>
+        }, {
+            name: 'CRM: PRAÇAS',
+            y: <%= (100.0*@solicitations.where(channel: "CRM: PRAÇAS").count) / @solicitations.count %>
+        }]
+    }]
+  });
+});
+</script>

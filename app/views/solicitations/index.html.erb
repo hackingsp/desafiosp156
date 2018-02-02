@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+  <title>156 Transparente</title>
+
+  <!-- CSS  -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+</head>
+<body>
+
+  <div class="container">
+    <div class="section">
+      <%= form_tag("/solicitations", method: "get") do %>
+        <%= label_tag(:q, "Search for:") %>
+        <%= text_field_tag(:q) %>
+        <%= submit_tag("Search") %>
+      <% end %>
+      <table>
+        <thead>
+          <tr>
+            <th>Endereço</th>
+            <th>Distrito</th>
+            <th style="background-color: white;">Assunto</th>
+            <th>Serviço</th>
+            <th style="background-color: white;">Status</th>
+            <th>Tema</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @solicitations.each do |solicitation| %>
+            <tr>
+                <td><%= solicitation.address %></td>
+                <td><%= solicitation.district %></td>
+                <td style="background-color: white;"><%= solicitation.subject %></td>
+                <td><%= solicitation.service %></td>
+                <td style="background-color: white;"><%= solicitation.solicitation_status %></td>
+                <td><%= solicitation.theme %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+
+      <%= will_paginate @solicitations %>
+    </div>
+    <br><br>
+  </div>
+
+  <!--  Scripts-->
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <script src="js/materialize.js"></script>
+  <script src="js/init.js"></script>
+
+  </body>
+</html>

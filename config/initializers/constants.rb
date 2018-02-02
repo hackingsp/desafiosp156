@@ -1,0 +1,1 @@
+SOLICITATIONS = Solicitation.all
