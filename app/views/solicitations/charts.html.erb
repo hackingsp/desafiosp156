@@ -1,54 +1,6 @@
-<br><br>
-<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-<script src="https://code.highcharts.com/highcharts.js"></script>
-<script src="https://code.highcharts.com/modules/exporting.js"></script>
-
-<div id="container" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
-
-<% unless @solicitations.nil? %>
-  <%= @solicitations.count %>
-<%end%>
-
-<script>
-// Build the chart
-Highcharts.chart('container', {
-    chart: {
-        plotBackgroundColor: null,
-        plotBorderWidth: null,
-        plotShadow: false,
-        type: 'pie'
-    },
-    title: {
-        text: 'Browser market shares January, 2015 to May, 2015'
-    },
-    tooltip: {
-        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-    },
-    plotOptions: {
-        pie: {
-            allowPointSelect: true,
-            cursor: 'pointer',
-            dataLabels: {
-                enabled: false
-            },
-            showInLegend: true
-        }
-    },
-    series: [{
-        name: 'Brands',
-        colorByPoint: true,
-        data: [{
-            name: 'EM ANDAMENTO',
-            y: <%= @solicitations.count - @solicitations.where(solicitation_status: "EM ANDAMENTO").count %>
-        }, {
-            name: 'ABERTA',
-            y: <%= @solicitations.count - @solicitations.where(solicitation_status: "ABERTA").count %>,
-            sliced: true,
-            selected: true
-        }, {
-            name: 'FINALIZADO',
-            y: <%= @solicitations.count - @solicitations.where(solicitation_status: "FINALIZADO").count %>
-        }]
-    }]
-});
-</script>
+<div class="container">
+  <div class="section">
+    <%= render :partial => "status_charts" %>
+  </div>
+  <br><br>
+</div>

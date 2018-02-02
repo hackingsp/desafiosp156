@@ -1,0 +1,59 @@
+<br><br>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+
+<div id="container" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+
+<br><br><br>
+<center><h5>Clique na legenda para remover o pedaço do gráfico pizza.</h5></center>
+
+<script>
+// Build the chart
+Highcharts.chart('container', {
+    chart: {
+        plotBackgroundColor: null,
+        plotBorderWidth: null,
+        plotShadow: false,
+        type: 'pie'
+    },
+    title: {
+        text: 'Todas as solicitações classificas pelo seu status'
+    },
+    tooltip: {
+        pointFormat: '{series.name}: <b>{point.percentage:.5f}%</b>'
+    },
+    plotOptions: {
+        pie: {
+            allowPointSelect: true,
+            cursor: 'pointer',
+            dataLabels: {
+                enabled: false
+            },
+            showInLegend: true
+        }
+    },
+    series: [{
+        name: 'Brands',
+        colorByPoint: true,
+        data: [{
+            name: 'EM ANDAMENTO',
+            y: <%= (100.0*@solicitations.where(solicitation_status: "EM ANDAMENTO").count) / @solicitations.count %>,
+        }, {
+            name: 'ABERTA',
+            y: <%= (100.0*@solicitations.where(solicitation_status: "ABERTA").count) / @solicitations.count %>,
+        }, {
+            name: 'FINALIZADO',
+            y: <%= (100.0*@solicitations.where(solicitation_status: "FINALIZADO").count) / @solicitations.count %>,
+            sliced: true,
+            selected: true
+        }, {
+            name: 'CANCELADA',
+            y: <%= (100.0*@solicitations.where(solicitation_status: "CANCELADA").count) / @solicitations.count %>
+        }, {
+            name: 'RELACIONADA',
+            y: <%= (100.0*@solicitations.where(solicitation_status: "RELACIONADA").count) / @solicitations.count %>
+        }]
+    }]
+});
+</script>
