@@ -1,12 +1,33 @@
+
+
 <br><br>
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script src="https://code.highcharts.com/highcharts.js"></script>
 <script src="https://code.highcharts.com/modules/exporting.js"></script>
-
-<div id="status_chart" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div><br>
-<div id="service_chart" style="min-width: 310px; height: 400px; max-width: 1000px; margin: 0 auto"></div><br>
-<div id="theme_chart" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div><br>
-<div id="channel_chart" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div><br>
+<div class="row" style="margin-top: 20px; margin-bottom: 50px">
+  <div id="status_chart" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto; margin-left: 400px" class="col s12 m4 l8"></div><br>
+  <div class="col s12 m4 l8" style="text-align: center; margin-top: 100px; width: 500px;">
+    O gráfico ao lado é referente aos status de cada solicitação feita nas plataformas da prefeitura. Os status possíveis são Finalizado, Em Aberto, Encerrado, Cancelado e Relacionado.
+  </div>
+</div>
+<div class="row" style="margin-top: 50px; margin-bottom: 50px">
+  <div class="col s12 m4 l8" style="text-align: center; margin-top: 100px; width: 500px; margin-left: 400px">
+    A prefeitura de São Paulo fornece vários serviços para a população e esses serviços são classificados em temas. Eles estão descritos no gráfico ao lado. Cada serviço contém várias solicitações, ou seja, o Serviço de tranporte contém várias outras soluções além apenas de "tapar buracos"
+  </div>
+  <div id="theme_chart" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto" class="col s12 m4 l8"></div><br>
+</div>
+<div class="row" style="margin-top: 50px; margin-bottom: 50px">
+  <div id="channel_chart" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto; margin-left: 400px" class="col s12 m4 l8"></div><br>
+  <div class="col s12 m4 l8" style="text-align: center; margin-top: 100px; width: 500px;">
+    É possível fazer uma solicitação de várias formas para a prefeitura, como pelo nosso aplicativo, pelo portal web ou até mesmo por ligação. No gráfico ao lado é mostrado quantas solicitações são feitas de acordo com cada serviço.
+  </div>
+</div>
+<div class="row" style="margin-top: 50px; margin-bottom: 50px">
+  <div class="col s12 m4 l8" style="text-align: center; padding-top: 100px; width: 500px; margin-left: 250px">
+    A Prefeitura fornece mais de 300 serviços para a população. Com o gráfico ao lado você consegue conferir qual o serviço mais pedido e te despertar a vontade de entender o motivo de as solicitações se repetirem tanto com alguns serviços específicos.
+  </div>
+  <div id="service_chart" style="min-width: 310px; height: 400px; max-width: 1000px; margin: 0 auto" class="col s12 m4 l8"></div><br>
+</div>
 
 
 <br><br>
