@@ -34,7 +34,7 @@
             <h2 class="center light-blue-text"><i class="material-icons">mic</i></h2>
             <%= link_to controller: "solicitations", action: "index"  do %>
               <h5 class="center">Solicitações
-              <p class="light">Neste tópico é possível pesquisar as solicitações feitas e verificar se realmente seu pedido foi feito.</p>
+              <p class="light">Veja todas as solicitações feitas e consiga filtrar rapidamente para achar o que você procura.</p>
               </h5>
             <% end %>
           </div>
@@ -45,7 +45,7 @@
             <h2 class="center light-blue-text"><i class="material-icons">insert_chart</i></h2>
             <%= link_to controller: "solicitations", action: "charts"  do %>
               <h5 class="center">Gráficos
-                <p class="light">Neste tópico é possível visualizar vários gráficos diversos que vão te auxiliar a entender os dados.</p>
+                <p class="light">Acompanhe gráficos diversos que vão te auxiliar a entender os dados da SP156.</p>
               </h5>
             <% end %>
           </div>
@@ -53,10 +53,12 @@
 
         <div class="col s12 m4">
           <div class="icon-block">
-            <h2 class="center light-blue-text"><i class="material-icons">filter_list</i></h2>
-            <h5 class="center">Filtros
-
-            <p class="light">Neste tópico é possível fazer filtros variados na aplicaçao.</p></h5>
+            <h2 class="center light-blue-text"><i class="material-icons">location_on</i></h2>
+            <%= link_to controller: "solicitations", action: "plot_map"  do %>
+              <h5 class="center">Mapa
+                <p class="light">Visualize as solicitações de forma dinâmica com o Google Maps</p>
+              </h5>
+            <% end %>
           </div>
         </div>
       </div>
