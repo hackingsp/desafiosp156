@@ -3,13 +3,12 @@
   <head>
     <title>HackatonSp</title>
     <%= csrf_meta_tags %>
-
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
   </head>
 
   <body>
-    <nav class="grey darken-3" role="navigation">
+    <nav role="navigation">
       <div class="nav-wrapper container">
         <%= link_to controller: "solicitations", action: "home"  do %>
           <%= image_tag("logo.jpg", :alt => "logo", size: "170x50", style: "margin-top: 7px") %>

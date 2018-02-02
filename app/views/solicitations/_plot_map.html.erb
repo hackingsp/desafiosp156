@@ -1,3 +1,4 @@
+TYPE html>
 <html>
 <head>
 <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
@@ -18,8 +19,6 @@ padding: 0;
 </style>
 </head>
 <body>
-
-<a class="waves-effect waves-light btn">button</a>
 <div id="map"></div>
 <script>
 
@@ -30,8 +29,8 @@ var teste = JSON.parse(teste1);
 function initMap() {
 
   var map = new google.maps.Map(document.getElementById('map'), {
-zoom: 10,
-center: {lat: -23.59394269, lng: -46.6204834}
+zoom: 3,
+center: {lat: -28.024, lng: 140.887}
 });
 
 // Create an array of alphabetical characters used to label the markers.
