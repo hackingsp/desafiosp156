@@ -3,12 +3,13 @@
 <script src="https://code.highcharts.com/highcharts.js"></script>
 <script src="https://code.highcharts.com/modules/exporting.js"></script>
 
-<div id="status_chart" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
-<div id="service_chart" style="min-width: 310px; height: 400px; max-width: 1000px; margin: 0 auto"></div>
-<div id="theme_chart" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+<div id="status_chart" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div><br>
+<div id="service_chart" style="min-width: 310px; height: 400px; max-width: 1000px; margin: 0 auto"></div><br>
+<div id="theme_chart" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div><br>
+<div id="channel_chart" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div><br>
 
 
-<br><br><br>
+<br><br>
 <center><h5>Clique na legenda para remover o pedaço do gráfico pizza.</h5></center>
 
 <script>
@@ -49,8 +50,6 @@ $(function() {
         }, {
             name: 'FINALIZADO',
             y: <%= (100.0*@solicitations.where(solicitation_status: "FINALIZADO").count) / @solicitations.count %>,
-            sliced: true,
-            selected: true
         }, {
             name: 'CANCELADA',
             y: <%= (100.0*@solicitations.where(solicitation_status: "CANCELADA").count) / @solicitations.count %>
@@ -184,6 +183,50 @@ $(function() {
         }, {
             name: 'Transporte',
             y: <%= (100.0*@solicitations.where(theme: "Transporte").count) / @solicitations.count %>
+        }]
+    }]
+  });
+  $('#channel_chart').highcharts({
+    chart: {
+        plotBackgroundColor: null,
+        plotBorderWidth: null,
+        plotShadow: false,
+        type: 'pie'
+    },
+    title: {
+        text: 'Todas as solicitações classificas pelo canal de solicitação'
+    },
+    tooltip: {
+        pointFormat: '{series.name}: <b>{point.percentage:.5f}%</b>'
+    },
+    plotOptions: {
+        pie: {
+            allowPointSelect: true,
+            cursor: 'pointer',
+            dataLabels: {
+                enabled: false
+            },
+            showInLegend: true
+        }
+    },
+    series: [{
+        name: 'Brands',
+        colorByPoint: true,
+        data: [{
+            name: 'APLICATIVO',
+            y: <%= (100.0*@solicitations.where(channel: "APLICATIVO").count) / @solicitations.count %>,
+        }, {
+            name: 'PORTAL ONLINE',
+            y: <%= (100.0*@solicitations.where(channel: "PORTAL ONLINE").count) / @solicitations.count %>,
+        }, {
+            name: 'CRM: CENTRAL',
+            y: <%= (100.0*@solicitations.where(channel: "CRM: CENTRAL").count) / @solicitations.count %>,
+        }, {
+            name: 'INTEGRAÇÕES',
+            y: <%= (100.0*@solicitations.where(channel: "INTEGRAÇÕES").count) / @solicitations.count %>
+        }, {
+            name: 'CRM: PRAÇAS',
+            y: <%= (100.0*@solicitations.where(channel: "CRM: PRAÇAS").count) / @solicitations.count %>
         }]
     }]
   });
