@@ -5,9 +5,8 @@
 
 <div id="container" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
 
-<% unless @solicitations.nil? %>
-  <%= @solicitations.count %>
-<%end%>
+<br><br><br>  
+<center><h5>Clique na legenda para remover o pedaço do gráfico pizza.</h5></center>
 
 <script>
 // Build the chart
@@ -19,10 +18,10 @@ Highcharts.chart('container', {
         type: 'pie'
     },
     title: {
-        text: 'Browser market shares January, 2015 to May, 2015'
+        text: 'Todas as solicitações classificas pelo seu status'
     },
     tooltip: {
-        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        pointFormat: '{series.name}: <b>{point.percentage:.5f}%</b>'
     },
     plotOptions: {
         pie: {
@@ -39,15 +38,21 @@ Highcharts.chart('container', {
         colorByPoint: true,
         data: [{
             name: 'EM ANDAMENTO',
-            y: <%= @solicitations.count - @solicitations.where(solicitation_status: "EM ANDAMENTO").count %>
+            y: <%= (100.0*@solicitations.where(solicitation_status: "EM ANDAMENTO").count) / @solicitations.count %>,
         }, {
             name: 'ABERTA',
-            y: <%= @solicitations.count - @solicitations.where(solicitation_status: "ABERTA").count %>,
+            y: <%= (100.0*@solicitations.where(solicitation_status: "ABERTA").count) / @solicitations.count %>,
+        }, {
+            name: 'FINALIZADO',
+            y: <%= (100.0*@solicitations.where(solicitation_status: "FINALIZADO").count) / @solicitations.count %>,
             sliced: true,
             selected: true
         }, {
-            name: 'FINALIZADO',
-            y: <%= @solicitations.count - @solicitations.where(solicitation_status: "FINALIZADO").count %>
+            name: 'CANCELADA',
+            y: <%= (100.0*@solicitations.where(solicitation_status: "CANCELADA").count) / @solicitations.count %>
+        }, {
+            name: 'RELACIONADA',
+            y: <%= (100.0*@solicitations.where(solicitation_status: "RELACIONADA").count) / @solicitations.count %>
         }]
     }]
 });

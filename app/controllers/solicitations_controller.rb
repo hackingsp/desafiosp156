@@ -12,13 +12,11 @@ end
 def show
 end
 
-def charts
+def status_charts
   @solicitations = Solicitation.all
 end
-private
 
-  def make_filters(elements=nil)
-  end
+private
   # Use callbacks to share common setup or constraints between actions.
   def set_solicitation
     @solicitation = Solicitation.find(params[:id])
