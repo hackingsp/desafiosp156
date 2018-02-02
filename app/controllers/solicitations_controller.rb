@@ -38,6 +38,20 @@ end
 
 def plot_map
   @solicitations_localizations = []
+  solicitations = Solicitation.all.first(10000)
+
+  solicitations.each do |solicitation|
+    localization = {}
+    localization['lat'] = solicitation.latitude.to_f
+    localization['lng'] = solicitation.longitude.to_f
+    @solicitations_localizations.push(localization)
+  end
+  puts @solicitations_localizations
+  @solicitations_localizations
+end
+
+def plot_temp_map
+  @solicitations_localizations = []
   solicitations = Solicitation.all.first(100)
 
   solicitations.each do |solicitation|
