@@ -23,9 +23,9 @@
         <thead>
           <tr>
             <th>Distrito</th>
-            <th>Assunto</th>
+            <th style="background-color: white;">Assunto</th>
             <th>Serviço</th>
-            <th>Status</th>
+            <th style="background-color: white;">Status</th>
             <th>Tema</th>
           </tr>
         </thead>
@@ -33,9 +33,9 @@
           <% @solicitations.each do |solicitation| %>
             <tr>
                 <td><%= solicitation.district %></td>
-                <td><%= solicitation.subject %></td>
+                <td style="background-color: white;"><%= solicitation.subject %></td>
                 <td><%= solicitation.service %></td>
-                <td><%= solicitation.solicitation_status %></td>
+                <td style="background-color: white;"><%= solicitation.solicitation_status %></td>
                 <td><%= solicitation.theme %></td>
             </tr>
           <% end %>
