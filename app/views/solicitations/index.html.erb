@@ -14,9 +14,34 @@
 
   <div class="container">
     <div class="section">
-      <% @solicitations.each do |solicitation| %>
-        <h1><%= solicitation.subject %></h1>
+      <%= form_tag("/solicitations", method: "get") do %>
+        <%= label_tag(:q, "Search for:") %>
+        <%= text_field_tag(:q) %>
+        <%= submit_tag("Search") %>
       <% end %>
+      <table>
+        <thead>
+          <tr>
+            <th>Distrito</th>
+            <th>Assunto</th>
+            <th>Serviço</th>
+            <th>Status</th>
+            <th>Tema</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @solicitations.each do |solicitation| %>
+            <tr>
+                <td><%= solicitation.district %></td>
+                <td><%= solicitation.subject %></td>
+                <td><%= solicitation.service %></td>
+                <td><%= solicitation.solicitation_status %></td>
+                <td><%= solicitation.theme %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+
       <%= will_paginate @solicitations %>
     </div>
     <br><br>

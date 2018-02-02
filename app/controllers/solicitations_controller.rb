@@ -10,7 +10,14 @@ end
 # GET /solicitations
 # GET /solicitations.json
 def index
-  @solicitations = Solicitation.paginate(:page => params[:page], :per_page => 5)
+  q = params[:q]
+
+  if q == "" || q == nil
+    @solicitations = Solicitation.paginate(:page => params[:page], :per_page => 25)
+  else
+    @solicitations = Solicitation.where("district LIKE :search OR subject LIKE :search OR service LIKE :search OR solicitation_status LIKE :search OR theme LIKE :search", search: "%#{q}%").all
+    @solicitations = @solicitations.paginate(:page => params[:page], :per_page => 25)
+  end
 end
 
 
