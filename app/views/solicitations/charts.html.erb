@@ -1,12 +1,15 @@
-<br><br><br><br><br><br><br><br><br><br>
+<br><br>
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script src="https://code.highcharts.com/highcharts.js"></script>
 <script src="https://code.highcharts.com/modules/exporting.js"></script>
 
 <div id="container" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
 
-<script>
+<% unless @solicitations.nil? %>
+  <%= @solicitations.count %>
+<%end%>
 
+<script>
 // Build the chart
 Highcharts.chart('container', {
     chart: {
@@ -35,25 +38,16 @@ Highcharts.chart('container', {
         name: 'Brands',
         colorByPoint: true,
         data: [{
-            name: 'Microsoft Internet Explorer',
-            y: 56.33
+            name: 'EM ANDAMENTO',
+            y: <%= @solicitations.count - @solicitations.where(solicitation_status: "EM ANDAMENTO").count %>
         }, {
-            name: 'Chrome',
-            y: 24.03,
+            name: 'ABERTA',
+            y: <%= @solicitations.count - @solicitations.where(solicitation_status: "ABERTA").count %>,
             sliced: true,
             selected: true
         }, {
-            name: 'Firefox',
-            y: 10.38
-        }, {
-            name: 'Safari',
-            y: 4.77
-        }, {
-            name: 'Opera',
-            y: 7.91
-        }, {
-            name: 'Proprietary or Undetectable',
-            y: 0.2
+            name: 'FINALIZADO',
+            y: <%= @solicitations.count - @solicitations.where(solicitation_status: "FINALIZADO").count %>
         }]
     }]
 });

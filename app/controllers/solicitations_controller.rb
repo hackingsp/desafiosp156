@@ -13,6 +13,7 @@ def show
 end
 
 def charts
+  @solicitations = Solicitation.all
 end
 private
 
