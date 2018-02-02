@@ -137,5 +137,55 @@ $(function() {
         }]
     }]
   });
+  $('#theme_chart').highcharts({
+    chart: {
+        plotBackgroundColor: null,
+        plotBorderWidth: null,
+        plotShadow: false,
+        type: 'pie'
+    },
+    title: {
+        text: 'Todas as solicitações classificas pelo seu tema'
+    },
+    tooltip: {
+        pointFormat: '{series.name}: <b>{point.percentage:.5f}%</b>'
+    },
+    plotOptions: {
+        pie: {
+            allowPointSelect: true,
+            cursor: 'pointer',
+            dataLabels: {
+                enabled: false
+            },
+            showInLegend: true
+        }
+    },
+    series: [{
+        name: 'Brands',
+        colorByPoint: true,
+        data: [{
+            name: 'Acessibilidade',
+            y: <%= (100.0*@solicitations.where(theme: "Acessibilidade").count) / @solicitations.count %>,
+        }, {
+            name: 'Animais',
+            y: <%= (100.0*@solicitations.where(theme: "Animais").count) / @solicitations.count %>,
+        }, {
+            name: 'Lixo e limpeza',
+            y: <%= (100.0*@solicitations.where(theme: "Lixo e limpeza").count) / @solicitations.count %>,
+        }, {
+            name: 'Meio Ambiente',
+            y: <%= (100.0*@solicitations.where(theme: "Meio Ambiente").count) / @solicitations.count %>
+        }, {
+            name: 'Rua e bairro',
+            y: <%= (100.0*@solicitations.where(theme: "Rua e bairro").count) / @solicitations.count %>
+        }, {
+            name: 'Trânsito',
+            y: <%= (100.0*@solicitations.where(theme: "Trânsito").count) / @solicitations.count %>
+        }, {
+            name: 'Transporte',
+            y: <%= (100.0*@solicitations.where(theme: "Transporte").count) / @solicitations.count %>
+        }]
+    }]
+  });
 });
 </script>
