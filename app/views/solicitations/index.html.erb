@@ -22,6 +22,7 @@
       <table>
         <thead>
           <tr>
+            <th>Endereço</th>
             <th>Distrito</th>
             <th style="background-color: white;">Assunto</th>
             <th>Serviço</th>
@@ -32,6 +33,7 @@
         <tbody>
           <% @solicitations.each do |solicitation| %>
             <tr>
+                <td><%= solicitation.address %></td>
                 <td><%= solicitation.district %></td>
                 <td style="background-color: white;"><%= solicitation.subject %></td>
                 <td><%= solicitation.service %></td>

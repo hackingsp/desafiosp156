@@ -15,7 +15,7 @@ def index
   if q == "" || q == nil
     @solicitations = Solicitation.paginate(:page => params[:page], :per_page => 25)
   else
-    @solicitations = Solicitation.where("district LIKE :search OR subject LIKE :search OR service LIKE :search OR solicitation_status LIKE :search OR theme LIKE :search", search: "%#{q}%").all
+    @solicitations = Solicitation.where("address LIKE :search OR district LIKE :search OR subject LIKE :search OR service LIKE :search OR solicitation_status LIKE :search OR theme LIKE :search", search: "%#{q}%").all
     @solicitations = @solicitations.paginate(:page => params[:page], :per_page => 25)
   end
 end
@@ -38,29 +38,15 @@ end
 
 def plot_map
   @solicitations_localizations = []
-  solicitations = Solicitation.all.first(10000)
+  solicitations = SOLICITATIONS
 
   solicitations.each do |solicitation|
     localization = {}
     localization['lat'] = solicitation.latitude.to_f
     localization['lng'] = solicitation.longitude.to_f
-    @solicitations_localizations.push(localization)
+    @solicitations_localizations.push(localization) if solicitation.solicitation_status == params[:id] || params[:id] == nil
   end
-  puts @solicitations_localizations
-  @solicitations_localizations
-end
 
-def plot_temp_map
-  @solicitations_localizations = []
-  solicitations = Solicitation.all.first(100)
-
-  solicitations.each do |solicitation|
-    localization = {}
-    localization['lat'] = solicitation.latitude.to_f
-    localization['lng'] = solicitation.longitude.to_f
-    @solicitations_localizations.push(localization)
-  end
-  puts @solicitations_localizations
   @solicitations_localizations
 end
 

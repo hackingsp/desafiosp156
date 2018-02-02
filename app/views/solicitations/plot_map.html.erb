@@ -19,11 +19,16 @@ padding: 0;
 </head>
 <body>
 
-<%= button_to 'Mapa de calor', plot_temp_map_url, method: :get %>
+<%= button_to 'Aberta', plot_map_url, params: {id: "ABERTA"}, method: :get %>
+<%= button_to 'Finalizada', plot_map_url, params: {id: "FINALIZADO"}, method: :get %>
+<%= button_to 'Em andamento', plot_map_url, params: {id: "EM ANDAMENTO"}, method: :get %>
+<%= button_to 'Relacionada', plot_map_url, params: {id: "RELACIONADA"}, method: :get %>
+<%= button_to 'Cancelada', plot_map_url, params: {id: "CANCELADA"}, method: :get %>
+
 <div id="map"></div>
 <script>
 
-var teste1 = '<%= @solicitations_localizations.first(10000).to_json %>'.replace(/&quot;/ig,'"');
+var teste1 = '<%= @solicitations_localizations.to_json %>'.replace(/&quot;/ig,'"');
 console.log(teste1)
 var teste = JSON.parse(teste1);
 
